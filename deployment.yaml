@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quotes-deployment
+  namespace: quotes-ns #always namespace should match with the namespace yaml file & service yamiiil
+  labels:
+    app: quotes-app # same way labels given in delpoyment file should match with the service yaml
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: quotes-app
+  template:
+    metadata:
+      labels:
+        app: quotes-app
+    spec:
+      containers:
+      - name: quotes
+        image: bhavyaam/docker-latestflask #copy paste repo name from dockerhub & same as image tag
+        ports:
+        - containerPort: 8080
+    
